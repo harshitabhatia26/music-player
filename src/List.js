@@ -1,37 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Search from './Search';
 
-const List = ({ onSelectSong }) => {
-    const [songs, setSongs] = useState([]);
+const List = ({ onSelectSong, songs, setSongs, loading, error, setLoading, setError  }) => {
     const [filteredSongs, setFilteredSongs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [durationsFetched, setDurationsFetched] = useState(false);
     const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
-
-    // Fetch songs from API
-    useEffect(() => {
-        const fetchSongs = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch('https://cms.samespace.com/items/songs');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setSongs(result.data);
-                setFilteredSongs(result.data); // Initialize filtered songs
-            } catch (error) {
-                setError('Failed to fetch songs. Please try again later.');
-                console.error('Error fetching the songs:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchSongs();
-    }, []);
 
     // Memoize getDuration function
     const getDuration = useCallback((url) => {

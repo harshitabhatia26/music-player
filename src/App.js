@@ -5,10 +5,51 @@ import Tab from './Tab';
 
 function App() {
   const [selectedSong, setSelectedSong] = useState(null);
+  const [currentTrack, setTrackIndex] = useState(0);
   const [accentColor, setAccentColor] = useState('rgba(0, 0, 0, 0)'); // Default transparent color
+  const [songs, setSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch songs from API
+  useEffect(() => {
+      const fetchSongs = async () => {
+          setLoading(true);
+          setError(null);
+          try {
+              const response = await fetch('https://cms.samespace.com/items/songs');
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              const result = await response.json();
+              setSongs(result.data);
+          } catch (error) {
+              setError('Failed to fetch songs. Please try again later.');
+              console.error('Error fetching the songs:', error);
+          } finally {
+              setLoading(false);
+          }
+      };
+
+      fetchSongs();
+  }, []);
 
   const handleSelectSong = (song) => {
     setSelectedSong(song);
+    setTrackIndex(song.id-1);
+  };
+
+  const handleNext = () => {
+    const nextIndex = (currentTrack + 1);
+    setTrackIndex(nextIndex);
+    setSelectedSong(songs[nextIndex]);
+    console.log(songs[nextIndex]);
+  };
+
+  const handlePrevious = () => {
+    const prevIndex = (currentTrack - 1 + songs.length) % songs.length;
+    setTrackIndex(prevIndex);
+    setSelectedSong(songs[prevIndex]);
   };
 
   useEffect(() => {
@@ -35,10 +76,10 @@ function App() {
         />
       </div>
       <div className="p-4 w-full sm:w-1/2 z-20">
-        <Player selectedSong={selectedSong} />
+        <Player selectedSong={selectedSong} onClickNext={handleNext} onClickPrevious={handlePrevious} />
       </div>
       <div className="block w-full sm:w-1/2 lg:w-1/3 z-20 px-2 py-6">
-        <Tab onSelectSong={handleSelectSong} />
+        <Tab onSelectSong={handleSelectSong} songs={songs} setSongs={setSongs} loading={loading} error={error} setLoading={setLoading} setError={setError} />
       </div>
     </div>
   );

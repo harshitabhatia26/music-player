@@ -1,35 +1,9 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Search from './Search';
 
-const ListTop = () => {
-    const [songs, setSongs] = useState([]);
+const ListTop = ({onSelectSong, songs, setSongs, loading, error, setLoading, setError }) => {
     const [filteredTopTracks, setFilteredTopTracks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState(''); // State for search query
-
-    // Fetch songs from API
-    useEffect(() => {
-        const fetchSongs = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch('https://cms.samespace.com/items/songs');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setSongs(result.data);
-            } catch (error) {
-                setError('Failed to fetch songs. Please try again later.');
-                console.error('Error fetching the songs:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchSongs();
-    }, []);
 
     // Memoize getDuration function
     const getDuration = useCallback((url) => {
@@ -81,7 +55,8 @@ const ListTop = () => {
     const renderedTopTracks = useMemo(() => (
         filteredTopTracks.map(song => (
             <li key={song.id}>
-                <div className='block rounded-lg hover:bg-gray-800 flex flex-row justify-between items-center p-2'>
+                <div className='block rounded-lg hover:bg-gray-800 flex flex-row justify-between items-center p-2'
+                    onClick={()=>onSelectSong(song)}>
                     <div className='flex flex-row'>
                         <img 
                             className='w-10 h-10 p-1 rounded-full object-cover' 
@@ -103,7 +78,7 @@ const ListTop = () => {
                 </div>
             </li>
         ))
-    ), [filteredTopTracks]);
+    ), [filteredTopTracks, onSelectSong]);
 
     return (
         <div>

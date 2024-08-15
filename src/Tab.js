@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import List from './List';
 import ListTop from './ListTop';
 
-const Tab = ({ onSelectSong }) => {
+const Tab = ({ onSelectSong, songs, setSongs, loading, error, setLoading, setError }) => {
     // State to manage the active tab
     const [activeTab, setActiveTab] = useState('for-you');
 
@@ -38,14 +38,14 @@ const Tab = ({ onSelectSong }) => {
                     <div>
                         
                        
-                        <List  onSelectSong={onSelectSong} />
+                        <List  onSelectSong={onSelectSong} songs={songs} setSongs={setSongs} loading={loading} error={error} setLoading={setLoading} setError={setError} />
                     </div>
                 )}
 
                 {activeTab === 'top-songs' && (
                     <div>
                         
-                        <ListTop />
+                        <ListTop onSelectSong={onSelectSong} songs={songs} setSongs={setSongs} loading={loading} error={error} setLoading={setLoading} setError={setError} />
                     </div>
                 )}
             </div>

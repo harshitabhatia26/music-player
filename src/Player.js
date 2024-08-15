@@ -1,7 +1,7 @@
 import React from 'react';
 import Audio from './Audio';
 
-const Player = ({ selectedSong }) => {
+const Player = ({ selectedSong, onClickNext, onClickPrevious }) => {
     if (!selectedSong) {
         return <div></div>;
     }
@@ -19,7 +19,7 @@ const Player = ({ selectedSong }) => {
                     className="h-64 object-cover sm:h-80 lg:h-96 aspect-square"
                 />
             </a>
-            <Audio url={selectedSong.url} />
+            <Audio url={selectedSong.url} onClickNext={onClickNext} onClickPrevious={onClickPrevious} />
         </div>
     );
 };
