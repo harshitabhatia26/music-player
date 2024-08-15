@@ -1,0 +1,96 @@
+diff --git a/node_modules/react-h5-audio-player/lib/styles.css b/node_modules/react-h5-audio-player/lib/styles.css
+index 21a7bef..58b66ff 100644
+--- a/node_modules/react-h5-audio-player/lib/styles.css
++++ b/node_modules/react-h5-audio-player/lib/styles.css
+@@ -6,7 +6,6 @@
+   font-family: inherit;
+   width: 100%;
+   padding: 10px 15px;
+-  background-color: #fff;
+   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+ }
+ .rhap_container:focus:not(:focus-visible) {
+@@ -77,12 +76,13 @@
+ }
+ 
+ .rhap_time {
+-  color: #333;
++  color: #ffffff;
+   font-size: 16px;
+   user-select: none;
+   -webkit-user-select: none;
+ }
+ 
++
+ .rhap_progress-bar {
+   box-sizing: border-box;
+   position: relative;
+@@ -97,12 +97,12 @@
+   height: 100%;
+   position: absolute;
+   z-index: 2;
+-  background-color: #868686;
++  background-color: #c4c3c3;
+   border-radius: 2px;
+ }
+ 
+ .rhap_progress-bar-show-download {
+-  background-color: rgba(221, 221, 221, 0.5);
++  background-color: rgba(240, 239, 239, 0.5);
+ }
+ 
+ .rhap_download-progress {
+@@ -121,7 +121,7 @@
+   height: 20px;
+   margin-left: -10px;
+   top: -8px;
+-  background: #868686;
++  background: #fefefe;
+   border-radius: 50px;
+   box-shadow: rgba(134, 134, 134, 0.5) 0 0 5px;
+ }
+@@ -143,7 +143,7 @@
+   font-size: 26px;
+   width: 26px;
+   height: 26px;
+-  color: #868686;
++  color: #fffbfb;
+   margin-right: 6px;
+ }
+ 
+@@ -156,7 +156,7 @@
+ 
+ .rhap_main-controls-button {
+   margin: 0 3px;
+-  color: #868686;
++  color: #fdfbfb;
+   font-size: 35px;
+   width: 35px;
+   height: 35px;
+@@ -180,7 +180,7 @@
+   font-size: 26px;
+   width: 26px;
+   height: 26px;
+-  color: #868686;
++  color: #ffffff;
+   margin-right: 6px;
+ }
+ 
+@@ -220,7 +220,7 @@
+   margin-left: -6px;
+   left: 0;
+   top: -4px;
+-  background: #868686;
++  background: #fffdfd;
+   opacity: 0.9;
+   border-radius: 50px;
+   box-shadow: rgba(134, 134, 134, 0.5) 0 0 3px;
+@@ -234,7 +234,7 @@
+   height: 100%;
+   position: absolute;
+   z-index: 2;
+-  background-color: #868686;
++  background-color: #f7f5f5;
+   border-radius: 2px;
+ }
+ 
